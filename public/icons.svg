@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+
+  <!-- 🚗 Vehicle -->
+  <symbol id="vehicle_icon" viewBox="0 0 24 24">
+    <path d="M4 13l2-5h12l2 5v6h-2v-2H6v2H4v-6zm2.5 1a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm11 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM6.5 9l-1 3h13l-1-3H6.5z"/>
+  </symbol>
+
+  <!-- 🏠 Real Estate -->
+  <symbol id="realestate_icon" viewBox="0 0 24 24">
+    <path d="M12 3l9 7h-3v11h-5v-6H11v6H6V10H3l9-7z"/>
+  </symbol>
+
+  <!-- 💡 Electronics -->
+  <symbol id="electronics_icon" viewBox="0 0 24 24">
+    <path d="M4 4h16v12H4V4zm0 14h16v2H4v-2z"/>
+  </symbol>
+
+  <!-- 🎉 Event & Party -->
+  <symbol id="event_icon" viewBox="0 0 24 24">
+    <path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-3.5L6 21l1.5-7.5L2 9h7z"/>
+  </symbol>
+
+  <!-- 🧰 Equipment & Tools -->
+  <symbol id="tools_icon" viewBox="0 0 24 24">
+    <path d="M22.7 19.3l-9.6-9.6a6 6 0 00-8.5 8.5l9.6 9.6a1 1 0 001.4 0l7.1-7.1a1 1 0 000-1.4zM6 10a4 4 0 110 8 4 4 0 010-8z"/>
+  </symbol>
+
+  <!-- 👗 Fashion -->
+  <symbol id="fashion_icon" viewBox="0 0 24 24">
+    <path d="M12 2l2 6h2l-1 5h-6l-1-5h2l2-6zm0 9a3 3 0 013 3v8h-6v-8a3 3 0 013-3z"/>
+  </symbol>
+
+</svg>
