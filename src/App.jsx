@@ -2,13 +2,14 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
-// Common
+/* Common */
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import DashboardLayout from "./components/DashboardLayout";
-import ScrollToHash from "./components/ScrollToHash"; // ✅ NEW
+import ScrollToHash from "./components/ScrollToHash";
+// ✅ Do NOT import LoginPage (we use modal only)
 
-// Public Pages
+/* Public Pages */
 import LandingPage from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
 import Home from "./pages/Home";
@@ -21,21 +22,21 @@ import Terms from "./pages/Terms";
 import Disclaimer from "./pages/Disclaimer";
 import ListItem from "./pages/ListItem";
 
-// Renter Pages
+/* Renter Pages */
 import RenterDashboard from "./pages/renter/RenterDashboard";
 import MyBookings from "./pages/renter/MyBookings";
 import Chat from "./pages/renter/Chat";
 import PaymentHistory from "./pages/renter/PaymentHistory";
 import Reviews from "./pages/renter/Reviews";
 
-// Owner Pages
+/* Owner Pages */
 import OwnerDashboard from "./pages/owner/OwnerDashboard";
 import MyListings from "./pages/owner/MyListings";
 import BookingRequests from "./pages/owner/BookingRequests";
 import AddNewItem from "./pages/owner/AddNewItem";
 import TransactionHistory from "./pages/owner/TransactionHistory";
 
-// Admin Pages
+/* Admin Pages */
 import Dashboard from "./pages/admin/Dashboard";
 import Users from "./pages/admin/Users";
 import Listings from "./pages/admin/Listings";
@@ -46,7 +47,7 @@ import Reports from "./pages/admin/Reports";
 import Settings from "./pages/admin/Settings";
 import Announcements from "./pages/admin/Announcements";
 
-// Layout for public pages
+/* Public Layout */
 function PublicShell() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -62,41 +63,30 @@ function PublicShell() {
 export default function App() {
   return (
     <Router>
-      {/* ✅ Runs on every navigation to handle #hash scrolling */}
       <ScrollToHash />
 
       <Routes>
+        {/* Public pages */}
+        <Route element={<PublicShell />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/why-choose-us" element={<Choose />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/list-item" element={<ListItem />} />
 
-        {/* 🌍 Landing Page */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Navbar />
-              <main className="flex-grow">
-                <LandingPage />
-              </main>
-              <Footer />
-            </>
-          }
-        />
+          {/* ✅ Remove login route completely */}
+          {/* <Route path="/login" element={<Login />} /> */}
 
-        {/* 📄 Extra Public Pages */}
-        <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
-        <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />
-        <Route path="/works" element={<><Navbar /><Works /><Footer /></>} />
-        <Route path="/why-choose-us" element={<><Navbar /><Choose /><Footer /></>} />
-        <Route path="/testimonials" element={<><Navbar /><Testimonials /><Footer /></>} />
-        <Route path="/privacy-policy" element={<><Navbar /><PrivacyPolicy /><Footer /></>} />
-        <Route path="/terms" element={<><Navbar /><Terms /><Footer /></>} />
-        <Route path="/disclaimer" element={<><Navbar /><Disclaimer /><Footer /></>} />
-        <Route path="/list-item" element={<><Navbar /><ListItem /><Footer /></>} />
+          {/* Register still exists */}
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
 
-        {/* 🚪 Auth Pages */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<><Navbar /><RegisterPage /><Footer /></>} />
-
-        {/* Dashboards with their own layout */}
+        {/* Renter Dashboard */}
         <Route path="/renter" element={<DashboardLayout role="renter" />}>
           <Route path="dashboard" element={<RenterDashboard />} />
           <Route path="bookings" element={<MyBookings />} />
@@ -105,6 +95,7 @@ export default function App() {
           <Route path="reviews" element={<Reviews />} />
         </Route>
 
+        {/* Owner Dashboard */}
         <Route path="/owner" element={<DashboardLayout role="owner" />}>
           <Route path="dashboard" element={<OwnerDashboard />} />
           <Route path="listings" element={<MyListings />} />
@@ -113,6 +104,7 @@ export default function App() {
           <Route path="transactions" element={<TransactionHistory />} />
         </Route>
 
+        {/* Admin Dashboard */}
         <Route path="/admin" element={<DashboardLayout role="admin" />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="users" element={<Users />} />
