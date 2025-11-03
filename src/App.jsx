@@ -8,12 +8,10 @@ import DashboardLayout from "./components/DashboardLayout"; // assuming you have
 
 // 🌍 Public Pages
 import LandingPage from "./pages/LandingPage";
-import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Works from "./pages/Works";
 import Choose from "./pages/Choose";
 import Testimonials from "./pages/Testimonials";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -69,7 +67,6 @@ function App() {
         {/* 📄 Extra Public Pages */}
         <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
         <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />
-        <Route path="/works" element={<><Navbar /><Works /><Footer /></>} />
         <Route path="/why-choose-us" element={<><Navbar /><Choose /><Footer /></>} />
         <Route path="/testimonials" element={<><Navbar /><Testimonials /><Footer /></>} />
         <Route path="/privacy-policy" element={<><Navbar /><PrivacyPolicy /><Footer /></>} />
@@ -78,7 +75,7 @@ function App() {
         <Route path="/list-item" element={<><Navbar /><ListItem /><Footer /></>} />
 
         {/* 🚪 Auth Pages */}
-        <Route path="/login" element={<LoginPage />} />
+      
         <Route path="/register" element={<><Navbar /><RegisterPage /><Footer /></>} />
 
         {/* 👤 Renter Dashboard */}
