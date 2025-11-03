@@ -1,60 +1,88 @@
 import React from "react";
 
-function LegalCard({ index, title, children }) {
-  return (
-    <div className="relative rounded-2xl bg-white shadow-md border border-teal-200 p-6 sm:p-7 mb-5 pl-6 
-                    transition-all hover:shadow-lg hover:border-teal-300">
-      {/* number bubble */}
-      <div className="absolute -left-5 top-6 flex h-9 w-9 items-center justify-center rounded-full 
-                      bg-teal-100 text-teal-700 font-semibold shadow">
-        {index}
-      </div>
-
-      <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
-        {title}
-      </h3>
-      <div className="text-gray-700 leading-relaxed">{children}</div>
-    </div>
-  );
-}
-
 export default function Disclaimer() {
-  const lastUpdated = "October 2025";
-
   return (
-    <main className="min-h-screen bg-gray-50">
-      <section className="mx-auto w-full max-w-6xl px-4 lg:px-6 py-8">
-        
-        {/* Title */}
-        <header className="text-center mb-6">
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-900">
-            Disclaimer
-          </h1>
-          <p className="text-gray-600 text-sm mt-1">Last updated: {lastUpdated}</p>
-        </header>
+    <main className="bg-white min-h-screen text-[#222] font-sans">
+      {/* Same wide container & spacing as Terms/Privacy */}
+      <div className="max-w-screen-2xl mx-auto px-3 md:px-6 lg:px-10 py-12">
 
-        {/* Legal Cards */}
-        <LegalCard index={1} title="Information Accuracy">
-          We strive for accuracy but do not guarantee that listings, pricing, availability, or other 
-          content are error-free or current. Owners are responsible for their listings and items.
-        </LegalCard>
+        {/* Centered page title (no breadcrumb) */}
+        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-10 text-center text-gray-900">
+          Fraud Awareness <span className="text-teal-600">Disclaimer</span>
+        </h1>
 
-        <LegalCard index={2} title="No Professional Advice">
-          Content on EasyRent is for general information and does not constitute legal, financial, or 
-          professional advice. Please obtain advice tailored to your situation when needed.
-        </LegalCard>
+        {/* Paragraphs only (no section headings), Zolo-style */}
+        <p className="text-[17px] leading-8 mb-7 text-gray-800">
+          We have observed attempts by unauthorized individuals and groups to misuse the EasyRent
+          name, logo, and brand identity in order to deceive the public. Such actors may contact users
+          through unofficial messaging platforms, social media pages, personal phone numbers, or
+          fake websites, while falsely claiming to represent EasyRent.
+        </p>
 
-        <LegalCard index={3} title="Third-Party Links & Services">
-          We are not responsible for third-party websites or services linked from EasyRent, including 
-          payment gateways (JazzCash, Easypaisa) and identity/OTP providers.
-        </LegalCard>
+        <p className="text-[17px] leading-8 mb-7 text-gray-800">
+          These individuals may try to obtain your personal information, request advance payments,
+          or ask for sensitive data by posing as EasyRent employees, agents, support staff, or rental
+          verification officers. EasyRent does not authorize any person to seek payments or personal
+          information outside our official website or app. Always verify that you are communicating
+          through EasyRent’s official channels before sharing details or making any payment.
+        </p>
 
-        <LegalCard index={4} title="Limitation of Liability">
-          To the extent permitted by law, EasyRent and its team will not be liable for indirect, incidental, 
-          special, or consequential losses (e.g., loss of profits, data, goodwill). Our total liability, if any, 
-          is limited to the fees you paid to us in the 3 months prior to the claim.
-        </LegalCard>
-      </section>
+        <p className="text-[17px] leading-8 mb-7 text-gray-800">
+          The objective of such fraudulent activity is to induce you to transfer money or disclose
+          sensitive information. We strongly advise you to refrain from making payments or sharing
+          any personal details until you have independently verified the authenticity of the request
+          through our official Platform.
+        </p>
+
+        {/* Numbered steps allowed (like Zolo) */}
+        <p className="text-[17px] leading-8 mb-3 text-gray-800">
+          If you believe you are the victim of fraud or have encountered suspicious communication,
+          please take the following steps immediately:
+        </p>
+        <ol className="list-decimal pl-6 text-[17px] leading-8 mb-7 text-gray-800 space-y-1">
+          <li>
+            Report the incident without delay to the relevant legal authorities. You may contact the
+            FIA Cyber Crime Wing or file an FIR at your nearest police station.
+          </li>
+          <li>
+            Inform EasyRent by emailing <span className="font-medium">fraud@easyrent.pk</span> or{" "}
+            <span className="font-medium">support@easyrent.pk</span>. Our team will review and assist promptly.
+          </li>
+          <li>
+            Preserve all supporting information such as screenshots, payment receipts, chat logs,
+            call recordings, bank transaction proofs, and any other relevant evidence.
+          </li>
+        </ol>
+
+        <p className="text-[17px] leading-8 mb-7 text-gray-800">
+          Use only the official EasyRent website and app to communicate with us. Do not rely on
+          WhatsApp numbers, unofficial pages, or third-party contacts claiming to represent EasyRent.
+          Fraudsters may use fake social profiles, ads, and direct messages to mislead you—always
+          verify first and proceed only through our verified Platform channels.
+        </p>
+
+        <p className="text-[17px] leading-8 mb-7 text-gray-800">
+          Any impersonation or unauthorized communication that misuses the EasyRent brand may result
+          in criminal and/or civil liability under applicable laws, including the Pakistan Electronic
+          Crimes Act (PECA) 2016. EasyRent cooperates with law enforcement authorities to prevent
+          brand misuse and to protect users.
+        </p>
+
+        <p className="text-[17px] leading-8 mb-7 text-gray-800">
+          Please note that EasyRent shall not be liable for any claims, losses, damages, expenses,
+          or inconvenience arising from interactions with unauthorized individuals operating outside
+          our official channels. We do not request advance payments through personal accounts, and we
+          do not charge “visit” or “verification” fees via informal methods.
+        </p>
+
+        <p className="text-[17px] leading-8 text-gray-800">
+          We are working with relevant authorities to stop fraudulent use of our brand. Be cautious if
+          anyone asks you to send money upfront—scammers often begin with small amounts and may lead to
+          significant financial loss. Stay vigilant and exercise caution when sharing personal information
+          or making digital payments.
+        </p>
+
+      </div>
     </main>
   );
 }
