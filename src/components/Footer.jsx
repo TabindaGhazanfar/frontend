@@ -1,65 +1,152 @@
+// src/components/Footer.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="relative mt-16 bg-gradient-to-t from-[#37ddcd] via-[#a9f1e9] to-[#3ab9a8] text-gray-200 overflow-hidden">
-      
-      {/* Black Overlay */}
-      <div className="absolute inset-0 bg-black/40 z-0"></div>
+    <footer className="relative mt-12 overflow-hidden text-white">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#2aaea0] via-[#1a8e83] to-[#107d72]" />
+      <div className="border-t border-white/15" />
 
-      {/* Main Container */}
-      <div className="relative max-w-7xl mx-auto backdrop-blur-md bg-white/5 border border-white/10 shadow-lg rounded-3xl px-8 py-14 grid grid-cols-1 md:grid-cols-4 gap-10 z-10">
-
-        {/* Brand Section */}
-        <div>
-          <h2 className="text-2xl font-bold text-white">EasyRent</h2>
-          <p className="mt-3 text-sm text-gray-200 leading-relaxed">
-            Rent anything, anytime — safely and smartly.
-            <br /> Empowering Pakistan’s sharing economy through trusted connections.
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:py-12">
+        <section aria-label="About EasyRent" className="max-w-3xl">
+          <h2 className="text-2xl font-semibold tracking-tight">EasyRent</h2>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/90">
+            Rent anything, anytime — safely and smartly. Empowering Pakistan’s sharing
+            economy through trusted connections.
           </p>
-        </div>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link
+              to="/list-item"
+              className="rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-teal-700 shadow-sm transition hover:shadow-md"
+            >
+              List Your Item
+            </Link>
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="text-white font-semibold mb-3">Quick Links</h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link to="/" className="hover:text-[#00A693] transition">Home</Link></li>
-            <li><Link to="/list-item" className="hover:text-[#00A693] transition">List Your Item</Link></li>
-            <li><Link to="/how-it-works" className="hover:text-[#00A693] transition">How It Works</Link></li>
-            <li><Link to="/why-choose-us" className="hover:text-[#00A693] transition">Why Choose Us</Link></li>
-            <li><Link to="/about" className="hover:text-[#00A693] transition">About Us</Link></li>
-            <li><Link to="/contact" className="hover:text-[#00A693] transition">Contact Us</Link></li>
-            <li><Link to="/testimonials" className="hover:text-[#00A693] transition">Testimonials</Link></li>
-          </ul>
-        </div>
+            {/* ✅ Updated: navigate to home + scroll to #how-it-works */}
+            <Link
+              to={{ pathname: "/", hash: "#how-it-works" }}
+              className="rounded-xl border border-white/70 px-5 py-2.5 text-sm font-semibold text-white/95 backdrop-blur-sm transition hover:bg-white/10"
+            >
+              How It Works
+            </Link>
+          </div>
+        </section>
 
-        {/* Legal & Support */}
-        <div>
-          <h3 className="text-white font-semibold mb-3">Legal & Support</h3>
-          <ul className="space-y-2 text-sm">
-            <li><Link to="/privacy-policy" className="hover:text-[#00A693] transition">Privacy Policy</Link></li>
-            <li><Link to="/terms" className="hover:text-[#00A693] transition">Terms & Conditions</Link></li>
-            <li><Link to="/disclaimer" className="hover:text-[#00A693] transition">Disclaimer</Link></li>
-          </ul>
-        </div>
+        <div className="my-6 h-px w-full bg-white/10" />
 
-        {/* Contact Section */}
-        <div>
-          <h3 className="text-white font-semibold mb-3">Contact Us</h3>
-          <p className="text-sm text-gray-200 leading-relaxed">
-            📧 support@easyrent.pk <br />
-            📞 +92 300 1234567 <br />
-            📍 University of Gujrat, Punjab, Pakistan
-          </p>
-        </div>
+        <nav
+          aria-label="Footer navigation"
+          className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4"
+        >
+          <section aria-label="Quick Links">
+            <h3 className="mb-2 text-sm font-semibold">Quick Links</h3>
+            <ul className="space-y-1.5 text-sm text-white/90">
+              {[
+                { to: "/", label: "Home" },
+                { to: "/list-item", label: "List Your Item" },
+                { to: "/how-it-works", label: "How It Works" },
+                { to: "/why-choose-us", label: "Why Choose Us" },
+                { to: "/about", label: "About Us" },
+                { to: "/contact", label: "Contact Us" },
+                { to: "/testimonials", label: "Testimonials" },
+              ].map((l) => (
+                <li key={l.to}>
+                  <Link
+                    to={l.to}
+                    className="rounded-sm hover:opacity-90 hover:underline focus:outline-none focus:ring-2 focus:ring-white/60"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section aria-label="Legal & Support">
+            <h3 className="mb-2 text-sm font-semibold">Legal &amp; Support</h3>
+            <ul className="space-y-1.5 text-sm text-white/90">
+              {[
+                { to: "/privacy-policy", label: "Privacy Policy" },
+                { to: "/terms", label: "Terms & Conditions" },
+                { to: "/disclaimer", label: "Disclaimer" },
+                { to: "/safety", label: "Trust & Safety" },
+              ].map((l) => (
+                <li key={l.to}>
+                  <Link
+                    to={l.to}
+                    className="rounded-sm hover:opacity-90 hover:underline focus:outline-none focus:ring-2 focus:ring-white/60"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section aria-label="Contact">
+            <h3 className="mb-2 text-sm font-semibold">Contact</h3>
+            <ul className="space-y-3 text-sm text-white/90">
+              <li>
+                <span className="block text-[11px] leading-4 text-white/60">Email</span>
+                <a href="mailto:support@easyrent.pk" className="hover:underline">
+                  support@easyrent.pk
+                </a>
+              </li>
+              <li>
+                <span className="block text-[11px] leading-4 text-white/60">Phone</span>
+                <a href="tel:+923001234567" className="hover:underline">
+                  +92 300 1234567
+                </a>
+              </li>
+              <li>
+                <span className="block text-[11px] leading-4 text-white/60">Address</span>
+                Gujrat, Punjab, Pakistan
+              </li>
+            </ul>
+          </section>
+
+          <section aria-label="Top Categories">
+            <h3 className="mb-2 text-sm font-semibold">Top Categories</h3>
+            <ul className="space-y-1.5 text-sm text-white/90">
+              {[
+                "Cameras & Lenses",
+                "Vehicles & Bikes",
+                "Furniture & Home",
+                "Electronics & Appliances",
+                "Tools & Hardware",
+                "Party & Events",
+                "Sports & Fitness",
+                "Travel Gear",
+              ].map((label) => (
+                <li key={label}>
+                  <Link
+                    to={`/category/${encodeURIComponent(
+                      label.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-")
+                    )}`}
+                    className="rounded-sm hover:opacity-90 hover:underline focus:outline-none focus:ring-2 focus:ring-white/60"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </nav>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="relative mt-8 border-t border-white/10 py-4 text-center text-sm text-gray-300 z-10">
-        © {new Date().getFullYear()}{" "}
-        <span className="text-[#00A693] font-bold">EasyRent</span>. All Rights Reserved.
-        <span className="block md:inline"> | Designed with 🤍 by Team EasyRent</span>
+      <div className="border-t border-white/20 px-6 py-4 text-center text-xs text-white/90 sm:flex sm:items-center sm:justify-between">
+        <p>
+          © {year} <span className="font-medium">EasyRent</span>. All Rights Reserved.
+        </p>
+        <div className="mt-2 flex items-center justify-center gap-6 sm:mt-0 sm:justify-end">
+          <span className="hidden sm:block">Made with ❤️ in Pakistan</span>
+          <a href="#" className="hover:underline">Facebook</a>
+          <a href="#" className="hover:underline">LinkedIn</a>
+          <a href="#" className="hover:underline">WhatsApp</a>
+        </div>
       </div>
     </footer>
   );
