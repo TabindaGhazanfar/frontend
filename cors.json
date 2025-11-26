@@ -1,0 +1,10 @@
+[
+  {
+    "origin": ["http://localhost:5176"],
+    "method": ["GET","POST","PUT","PATCH","DELETE","HEAD"],
+    "responseHeader": ["Content-Type","Authorization","X-Firebase-Storage-Version","X-Client-Version"],
+    "maxAgeSeconds": 3600
+  }
+]
+
+

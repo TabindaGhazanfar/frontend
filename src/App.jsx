@@ -2,15 +2,19 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
-// Common
+// Firebase
+import app, { db } from "./firebase";
+
+
+
+// Components
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import DashboardLayout from "./components/DashboardLayout";
-import ScrollToHash from "./components/ScrollToHash"; // ✅ NEW
+import ScrollToHash from "./components/ScrollToHash";
 
-// Public Pages
+// Pages
 import LandingPage from "./pages/LandingPage";
-import RegisterPage from "./pages/RegisterPage";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -20,6 +24,12 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import Disclaimer from "./pages/Disclaimer";
 import ListItem from "./pages/ListItem";
+import CategoryListings from "./pages/new/CategoryListings";
+import PopularListings from "./components/PopularListings";
+import ListingDetail from "./components/ListingDetail";
+
+// ⭐ NEW: Registration Page you provided
+import RegistrationPage from "./components/RegistrationPage";
 
 // Renter Pages
 import RenterDashboard from "./pages/renter/RenterDashboard";
@@ -46,7 +56,7 @@ import Reports from "./pages/admin/Reports";
 import Settings from "./pages/admin/Settings";
 import Announcements from "./pages/admin/Announcements";
 
-// Layout for public pages
+// Public Layout Wrapper
 function PublicShell() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -61,70 +71,69 @@ function PublicShell() {
 
 export default function App() {
   return (
-    <Router>
-      {/* ✅ Runs on every navigation to handle #hash scrolling */}
-      <ScrollToHash />
+    
+      <Router>
+        <ScrollToHash />
+        <Routes>
+          {/* Public Pages */}
+          <Route element={<PublicShell />}>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/why-choose-us" element={<Choose />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/disclaimer" element={<Disclaimer />} />
+            <Route path="/list-item" element={<ListItem />} />
 
-      <Routes>
+            {/* ⭐ Registration Page */}
+            <Route path="/register" element={<RegistrationPage />} />
 
-        {/* 🌍 Landing Page */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Navbar />
-              <main className="flex-grow">
-                <LandingPage />
-              </main>
-              <Footer />
-            </>
-          }
-        />
+            {/* Listings */}
+            <Route path="/listings" element={<PopularListings />} />
+            <Route path="/listing/:id" element={<ListingDetail />} />
 
-        {/* 📄 Extra Public Pages */}
-        <Route path="/about" element={<><Navbar /><About /><Footer /></>} />
-        <Route path="/contact" element={<><Navbar /><Contact /><Footer /></>} />
-        <Route path="/works" element={<><Navbar /><Works /><Footer /></>} />
-        <Route path="/why-choose-us" element={<><Navbar /><Choose /><Footer /></>} />
-        <Route path="/testimonials" element={<><Navbar /><Testimonials /><Footer /></>} />
-        <Route path="/privacy-policy" element={<><Navbar /><PrivacyPolicy /><Footer /></>} />
-        <Route path="/terms" element={<><Navbar /><Terms /><Footer /></>} />
-        <Route path="/disclaimer" element={<><Navbar /><Disclaimer /><Footer /></>} />
-        <Route path="/list-item" element={<><Navbar /><ListItem /><Footer /></>} />
+            {/* Category */}
+            <Route path="/category/:categoryName" element={<CategoryListings />} />
+          </Route>
 
-        {/* 🚪 Auth Pages */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<><Navbar /><RegisterPage /><Footer /></>} />
+          {/* Renter Dashboard */}
+          <Route path="/renter" element={<DashboardLayout role="renter" />}>
+            <Route index element={<RenterDashboard />} />
+            <Route path="dashboard" element={<RenterDashboard />} />
+            <Route path="bookings" element={<MyBookings />} />
+            <Route path="chat" element={<Chat />} />
+            <Route path="payments" element={<PaymentHistory />} />
+            <Route path="reviews" element={<Reviews />} />
+          </Route>
 
-        {/* Dashboards with their own layout */}
-        <Route path="/renter" element={<DashboardLayout role="renter" />}>
-          <Route path="dashboard" element={<RenterDashboard />} />
-          <Route path="bookings" element={<MyBookings />} />
-          <Route path="chat" element={<Chat />} />
-          <Route path="payments" element={<PaymentHistory />} />
-          <Route path="reviews" element={<Reviews />} />
-        </Route>
+          {/* Owner Dashboard */}
+          <Route path="/owner" element={<DashboardLayout role="owner" />}>
+            <Route index element={<OwnerDashboard />} />
+            <Route path="dashboard" element={<OwnerDashboard />} />
+            <Route path="listings" element={<MyListings />} />
+            <Route path="requests" element={<BookingRequests />} />
+            <Route path="add" element={<AddNewItem />} />
+            <Route path="transactions" element={<TransactionHistory />} />
+          </Route>
 
-        <Route path="/owner" element={<DashboardLayout role="owner" />}>
-          <Route path="dashboard" element={<OwnerDashboard />} />
-          <Route path="listings" element={<MyListings />} />
-          <Route path="requests" element={<BookingRequests />} />
-          <Route path="add" element={<AddNewItem />} />
-          <Route path="transactions" element={<TransactionHistory />} />
-        </Route>
-
-        <Route path="/admin" element={<DashboardLayout role="admin" />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="users" element={<Users />} />
-          <Route path="listings" element={<Listings />} />
-          <Route path="transactions" element={<Transactions />} />
-          <Route path="bookings" element={<BookingRequestsAdmin />} />
-          <Route path="categories" element={<Categories />} />
-          <Route path="reports" element={<Reports />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="announcements" element={<Announcements />} />
-        </Route>
-      </Routes>
-    </Router>
+          {/* Admin Dashboard */}
+          <Route path="/admin" element={<DashboardLayout role="admin" />}>
+            <Route index element={<Dashboard />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="listings" element={<Listings />} />
+            <Route path="transactions" element={<Transactions />} />
+            <Route path="bookings" element={<BookingRequestsAdmin />} />
+            <Route path="categories" element={<Categories />} />
+            <Route path="reports" element={<Reports />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="announcements" element={<Announcements />} />
+          </Route>
+        </Routes>
+      </Router>
+   
   );
 }

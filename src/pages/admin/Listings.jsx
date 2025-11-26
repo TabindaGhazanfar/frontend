@@ -108,4 +108,4 @@ export default function Listings() {
       </div>
     </div>
   );
-}
+} 

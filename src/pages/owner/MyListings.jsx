@@ -1,45 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Edit, Trash2, Eye, PlusCircle } from "lucide-react";
+import { db } from "../../firebase";
+import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 
 export default function MyListings() {
-  // Dummy data (replace with backend API data later)
-  const [listings, setListings] = useState([
-    {
-      id: 1,
-      title: "Toyota Corolla 2020",
-      category: "Car",
-      price: "3500/day",
-      status: "Active",
-      image: "https://images.unsplash.com/photo-1605559424843-9d8b11b3bbd0?auto=format&fit=crop&w=600&q=60",
-    },
-    {
-      id: 2,
-      title: "Canon DSLR Camera",
-      category: "Camera",
-      price: "1500/day",
-      status: "Rented",
-      image: "https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=600&q=60",
-    },
-    {
-      id: 3,
-      title: "Elegant Wedding Dress",
-      category: "Dress",
-      price: "2000/day",
-      status: "Pending",
-      image: "https://images.unsplash.com/photo-1520975918318-3c0c0e9863a3?auto=format&fit=crop&w=600&q=60",
-    },
-  ]);
+  const [listings, setListings] = useState([]);
 
-  const handleDelete = (id) => {
+  useEffect(() => {
+    // 🔥 Show ALL listings (no ownerId, no login needed)
+    const q = collection(db, "items");
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const fetched = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setListings(fetched);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this listing?")) {
-      setListings(listings.filter((item) => item.id !== id));
+      await deleteDoc(doc(db, "items", id));
       alert("Listing deleted successfully!");
     }
   };
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#f9fafb] via-[#f0fdf4] to-[#fffaf0] p-6 md:p-10">
+
       {/* Header */}
       <div className="flex items-center justify-between mb-10">
         <div>
@@ -65,48 +57,52 @@ export default function MyListings() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
+              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition p-4"
             >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-48 object-cover"
-              />
+              <div className="flex flex-col justify-between h-full">
 
-              <div className="p-4 flex flex-col justify-between h-48">
-                <div>
+                {/* Item Info */}
+                <div className="mb-3">
                   <h2 className="text-lg font-semibold text-gray-800 mb-1">
-                    {item.title}
+                    {item.name || "No Title"}
                   </h2>
-                  <p className="text-sm text-gray-500 mb-2">
-                    {item.category}
+
+                  <p className="text-sm text-gray-500 mb-1">
+                    Category: {item.category || "N/A"}
                   </p>
+
                   <p className="text-[#C47C5E] font-semibold mb-1">
-                    {item.price}
+                    Price: {item.price || "N/A"}
+                  </p>
+
+                  <p className="text-sm mb-1">
+                    Location: {item.location || "N/A"}
+                  </p>
+
+                  <p className="text-sm mb-1">
+                    Rent Type: {item.rentType || "N/A"}
+                  </p>
+
+                  <p className="text-sm mb-1">
+                    Condition: {item.condition || "N/A"}
                   </p>
 
                   {/* Status */}
-                  <span
-                    className={`inline-block px-3 py-1 text-xs font-medium rounded-full ${
-                      item.status === "Active"
-                        ? "bg-green-100 text-green-700"
-                        : item.status === "Rented"
-                        ? "bg-blue-100 text-blue-700"
-                        : "bg-yellow-100 text-yellow-700"
-                    }`}
-                  >
-                    {item.status}
+                  <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">
+                    Active
                   </span>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex items-center justify-between mt-3">
+                {/* Actions */}
+                <div className="flex items-center justify-between mt-2">
                   <button className="flex items-center gap-1 text-[#299F93] hover:text-[#227c70] text-sm font-medium">
                     <Edit size={16} /> Edit
                   </button>
+
                   <button className="flex items-center gap-1 text-[#C47C5E] hover:text-[#a96850] text-sm font-medium">
                     <Eye size={16} /> View
                   </button>
+
                   <button
                     onClick={() => handleDelete(item.id)}
                     className="flex items-center gap-1 text-red-500 hover:text-red-700 text-sm font-medium"
@@ -114,6 +110,7 @@ export default function MyListings() {
                     <Trash2 size={16} /> Delete
                   </button>
                 </div>
+
               </div>
             </motion.div>
           ))}
@@ -132,3 +129,5 @@ export default function MyListings() {
     </section>
   );
 }
+
+
