@@ -1,3 +1,4 @@
+// src/components/LoginModal.jsx
 import React from "react";
 import LoginIllustration from "../assets/illustrationLogin.svg"; // ✅ use correct asset file
 
@@ -39,6 +40,7 @@ export default function LoginModal({ open = true, onClose = () => {} }) {
                   required
                   placeholder="you@example.com"
                   className="mt-1 w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-4 focus:ring-[#00A693]/20 focus:border-[#00A693]"
+                  className="mt-1 w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-4 focus:ring-[#00A693]/20 focus:border-[#00A693]"
                 />
               </div>
 
@@ -49,13 +51,16 @@ export default function LoginModal({ open = true, onClose = () => {} }) {
                   required
                   placeholder="••••••••"
                   className="mt-1 w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-4 focus:ring-[#00A693]/20 focus:border-[#00A693]"
+                  className="mt-1 w-full rounded-xl border border-gray-200 px-4 py-3 outline-none focus:ring-4 focus:ring-[#00A693]/20 focus:border-[#00A693]"
                 />
               </div>
 
               <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2 text-sm text-gray-600">
-                  <input type="checkbox" className="h-4 w-4 text-[#00A693]" /> Remember me
+                  <input type="checkbox" className="h-4 w-4 text-[#00A693]" />{" "}
+                  Remember me
                 </label>
+                <a href="#" className="text-sm text-[#00A693] hover:underline">
                 <a href="#" className="text-sm text-[#00A693] hover:underline">
                   Forgot password?
                 </a>
@@ -64,20 +69,24 @@ export default function LoginModal({ open = true, onClose = () => {} }) {
               <button
                 type="submit"
                 className="w-full rounded-xl bg-[#00A693] py-3 text-white font-semibold hover:brightness-110 active:scale-95 transition"
+                className="w-full rounded-xl bg-[#00A693] py-3 text-white font-semibold hover:brightness-110 active:scale-95 transition"
               >
                 Log in
               </button>
 
               <p className="text-center text-sm text-gray-500">
                 Don’t have an account?{" "}
-                <a href="/register" className="text-[#007a6a] font-medium hover:underline">
+                <a
+                  href="/register"
+                  className="text-[#007a6a] font-medium hover:underline"
+                >
                   Create one
                 </a>
               </p>
             </form>
           </div>
 
-          {/* Right – Illustration Panel */}
+                {/* Right – Illustration Panel */}
           <div className="relative bg-gradient-to-br from-[#00A693] to-[#008b73] flex items-center justify-center p-10">
             <img
               src={LoginIllustration}

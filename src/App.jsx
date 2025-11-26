@@ -2,16 +2,20 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 
-/* Common */
+// Firebase
+import app, { db } from "./firebase";
+
+
+
+/* Components */
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import DashboardLayout from "./components/DashboardLayout";
 import ScrollToHash from "./components/ScrollToHash";
 // ✅ Do NOT import LoginPage (we use modal only)
 
-/* Public Pages */
+/* Pages */
 import LandingPage from "./pages/LandingPage";
-import RegisterPage from "./pages/RegisterPage";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -96,27 +100,32 @@ export default function App() {
         </Route>
 
         {/* Owner Dashboard */}
-        <Route path="/owner" element={<DashboardLayout role="owner" />}>
-          <Route path="dashboard" element={<OwnerDashboard />} />
-          <Route path="listings" element={<MyListings />} />
-          <Route path="requests" element={<BookingRequests />} />
-          <Route path="add" element={<AddNewItem />} />
-          <Route path="transactions" element={<TransactionHistory />} />
-        </Route>
+          {/* Owner Dashboard */}
+          <Route path="/owner" element={<DashboardLayout role="owner" />}>
+            <Route index element={<OwnerDashboard />} />
+            <Route path="dashboard" element={<OwnerDashboard />} />
+            <Route path="listings" element={<MyListings />} />
+            <Route path="requests" element={<BookingRequests />} />
+            <Route path="add" element={<AddNewItem />} />
+            <Route path="transactions" element={<TransactionHistory />} />
+          </Route>
 
         {/* Admin Dashboard */}
-        <Route path="/admin" element={<DashboardLayout role="admin" />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="users" element={<Users />} />
-          <Route path="listings" element={<Listings />} />
-          <Route path="transactions" element={<Transactions />} />
-          <Route path="bookings" element={<BookingRequestsAdmin />} />
-          <Route path="categories" element={<Categories />} />
-          <Route path="reports" element={<Reports />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="announcements" element={<Announcements />} />
-        </Route>
-      </Routes>
-    </Router>
+          {/* Admin Dashboard */}
+          <Route path="/admin" element={<DashboardLayout role="admin" />}>
+            <Route index element={<Dashboard />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="listings" element={<Listings />} />
+            <Route path="transactions" element={<Transactions />} />
+            <Route path="bookings" element={<BookingRequestsAdmin />} />
+            <Route path="categories" element={<Categories />} />
+            <Route path="reports" element={<Reports />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="announcements" element={<Announcements />} />
+          </Route>
+        </Routes>
+      </Router>
+   
   );
 }
