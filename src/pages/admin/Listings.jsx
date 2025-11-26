@@ -9,7 +9,7 @@ export default function Listings() {
       title: "Toyota Corolla 2020",
       owner: "Alice Smith",
       category: "Car",
-      price: "$50/day",
+      price: "PKR 14,000/day", // updated
       status: "Pending",
     },
     {
@@ -17,7 +17,7 @@ export default function Listings() {
       title: "Canon DSLR Camera",
       owner: "John Doe",
       category: "Camera",
-      price: "$30/day",
+      price: "PKR 8,400/day", // updated
       status: "Active",
     },
     {
@@ -25,7 +25,7 @@ export default function Listings() {
       title: "Elegant Wedding Dress",
       owner: "Mary Johnson",
       category: "Dress",
-      price: "$70/day",
+      price: "PKR 19,600/day", // updated
       status: "Pending",
     },
   ]);

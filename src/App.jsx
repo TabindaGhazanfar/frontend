@@ -1,6 +1,6 @@
 // src/App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet, Navigate } from "react-router-dom";
 
 // Firebase
 import app, { db } from "./firebase";
@@ -8,11 +8,11 @@ import app, { db } from "./firebase";
 
 
 /* Components */
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import DashboardLayout from "./components/DashboardLayout";
-import ScrollToHash from "./components/ScrollToHash";
-// ✅ Do NOT import LoginPage (we use modal only)
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
+import DashboardLayout from "./components/DashboardLayout.jsx";
+import ScrollToHash from "./components/ScrollToHash.jsx";
+// Note: Login is handled via modal elsewhere — do not import Login page here
 
 /* Pages */
 import LandingPage from "./pages/LandingPage";
@@ -27,31 +27,33 @@ import Disclaimer from "./pages/Disclaimer";
 import ListItem from "./pages/ListItem";
 
 /* Renter Pages */
-import RenterDashboard from "./pages/renter/RenterDashboard";
-import MyBookings from "./pages/renter/MyBookings";
-import Chat from "./pages/renter/Chat";
-import PaymentHistory from "./pages/renter/PaymentHistory";
-import Reviews from "./pages/renter/Reviews";
+import RenterDashboard from "./pages/renter/RenterDashboard.jsx";
+import MyBookings from "./pages/renter/MyBookings.jsx";
+import Chat from "./pages/renter/Chat.jsx";
+import PaymentHistory from "./pages/renter/PaymentHistory.jsx";
+import Reviews from "./pages/renter/Reviews.jsx";
+/* NEW RENTER PAGES */
+import Favorites from "./pages/renter/Favorites.jsx";
+
+import Notifications from "./pages/renter/Notifications.jsx";
+import Profile from "./pages/renter/Profile.jsx";
+import Settings from "./pages/renter/Settings.jsx";
 
 /* Owner Pages */
-import OwnerDashboard from "./pages/owner/OwnerDashboard";
-import MyListings from "./pages/owner/MyListings";
-import BookingRequests from "./pages/owner/BookingRequests";
-import AddNewItem from "./pages/owner/AddNewItem";
-import TransactionHistory from "./pages/owner/TransactionHistory";
+import OwnerDashboard from "./pages/owner/OwnerDashboard.jsx";
+import MyListings from "./pages/owner/MyListings.jsx";
+import BookingRequests from "./pages/owner/BookingRequests.jsx";
+import AddNewItem from "./pages/owner/AddNewItem.jsx";
+import TransactionHistory from "./pages/owner/TransactionHistory.jsx";
 
 /* Admin Pages */
-import Dashboard from "./pages/admin/Dashboard";
-import Users from "./pages/admin/Users";
-import Listings from "./pages/admin/Listings";
-import Transactions from "./pages/admin/Transactions";
-import BookingRequestsAdmin from "./pages/admin/BookingRequestsAdmin";
-import Categories from "./pages/admin/Categories";
-import Reports from "./pages/admin/Reports";
-import Settings from "./pages/admin/Settings";
-import Announcements from "./pages/admin/Announcements";
+import Dashboard from "./pages/admin/Dashboard.jsx";
+import Users from "./pages/admin/Users.jsx";
+import Listings from "./pages/admin/Listings.jsx";
+import Bookings from "./pages/admin/Bookings.jsx"; // admin bookings page
+import Reports from "./pages/admin/Reports.jsx";
 
-/* Public Layout */
+/* Public layout wrapper */
 function PublicShell() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -60,6 +62,19 @@ function PublicShell() {
         <Outlet />
       </main>
       <Footer />
+    </div>
+  );
+}
+
+/* Simple 404 page */
+function NotFound() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold mb-2">Page not found</h2>
+        <p className="text-gray-600 mb-4">We couldn't find the page you're looking for.</p>
+        <a href="/" className="text-[#299F93] font-semibold">Return to home</a>
+      </div>
     </div>
   );
 }
@@ -83,20 +98,24 @@ export default function App() {
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/list-item" element={<ListItem />} />
 
-          {/* ✅ Remove login route completely */}
-          {/* <Route path="/login" element={<Login />} /> */}
-
-          {/* Register still exists */}
+          {/* Register route */}
           <Route path="/register" element={<RegisterPage />} />
         </Route>
 
-        {/* Renter Dashboard */}
+        {/* Renter routes (uses DashboardLayout with role="renter") */}
         <Route path="/renter" element={<DashboardLayout role="renter" />}>
+          <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<RenterDashboard />} />
           <Route path="bookings" element={<MyBookings />} />
           <Route path="chat" element={<Chat />} />
           <Route path="payments" element={<PaymentHistory />} />
           <Route path="reviews" element={<Reviews />} />
+
+          {/* New renter pages */}
+          <Route path="favorites" element={<Favorites />} />
+          <Route path="notifications" element={<Notifications />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
 
         {/* Owner Dashboard */}

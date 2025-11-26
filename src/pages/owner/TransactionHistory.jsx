@@ -9,7 +9,7 @@ export default function TransactionHistory() {
       item: "Toyota Corolla 2020",
       renter: "Ali Khan",
       date: "2025-11-01",
-      amount: "$350",
+      amount: "₨3500",
       status: "Completed",
     },
     {
@@ -17,7 +17,7 @@ export default function TransactionHistory() {
       item: "Canon DSLR Camera",
       renter: "Sara Ahmed",
       date: "2025-11-03",
-      amount: "$150",
+      amount: "₨15000",
       status: "Pending",
     },
     {
@@ -25,7 +25,7 @@ export default function TransactionHistory() {
       item: "Wedding Dress",
       renter: "Hamza Ali",
       date: "2025-11-05",
-      amount: "$200",
+      amount: "₨20000",
       status: "Failed",
     },
   ]);

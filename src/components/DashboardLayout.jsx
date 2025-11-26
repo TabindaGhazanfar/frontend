@@ -7,9 +7,10 @@ import {
   CreditCard,
   Star,
   LogOut,
-  BarChart2,
-  PlusCircle,
   FileText,
+  Bell,
+  Heart,
+  Settings as SettingsIcon,
 } from "lucide-react";
 
 export default function DashboardLayout({ role = "renter" }) {
@@ -22,8 +23,16 @@ export default function DashboardLayout({ role = "renter" }) {
       { name: "My Bookings", path: "/renter/bookings", icon: User },
       { name: "Chat", path: "/renter/chat", icon: MessageSquare },
       { name: "Payments", path: "/renter/payments", icon: CreditCard },
+
+      // NEW FEATURES
+      { name: "Favorites", path: "/renter/favorites", icon: Heart },
+      { name: "Notifications", path: "/renter/notifications", icon: Bell },
+      { name: "Profile", path: "/renter/profile", icon: User },
+      { name: "Settings", path: "/renter/settings", icon: SettingsIcon },
+
       { name: "Reviews", path: "/renter/reviews", icon: Star },
     ],
+
     owner: [
       { name: "Dashboard", path: "/owner/dashboard", icon: Home },
       { name: "My Listings", path: "/owner/listings", icon: User },
@@ -31,16 +40,13 @@ export default function DashboardLayout({ role = "renter" }) {
       { name: "Add New Item", path: "/owner/add", icon: Star },
       { name: "Transactions", path: "/owner/transactions", icon: CreditCard },
     ],
+
     admin: [
       { name: "Dashboard", path: "/admin/dashboard", icon: Home },
       { name: "Users", path: "/admin/users", icon: User },
       { name: "Listings", path: "/admin/listings", icon: Home },
-      { name: "Transactions", path: "/admin/transactions", icon: BarChart2 },
-      { name: "Booking Requests", path: "/admin/bookings", icon: MessageSquare },
-      { name: "Categories", path: "/admin/categories", icon: PlusCircle },
-      { name: "Reports", path: "/admin/reports", icon: FileText },
-      { name: "Settings", path: "/admin/settings", icon: User },
-      { name: "Announcements", path: "/admin/announcements", icon: MessageSquare },
+      { name: "Bookings", path: "/admin/bookings", icon: MessageSquare },
+      { name: "Reported Issues", path: "/admin/reports", icon: FileText },
     ],
   };
 
@@ -91,5 +97,3 @@ export default function DashboardLayout({ role = "renter" }) {
     </div>
   );
 }
-
-

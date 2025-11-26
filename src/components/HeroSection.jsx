@@ -1,3 +1,4 @@
+// src/components/HeroSection.jsx
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import img1 from "../assets/new.png";
@@ -21,7 +22,7 @@ export default function HeroSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 6000); // changed from 8000ms to 4000ms
+    }, 6000); // changed from 8000ms to 6000ms
     return () => clearInterval(interval);
   }, []);
 
@@ -41,18 +42,21 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative w-full h-[500px] md:h-[550px] flex items-center justify-center overflow-hidden rounded-3xl">
+    // removed rounded-3xl here so hero images are square
+    <section className="relative w-full h-[500px] md:h-[550px] flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
       <AnimatePresence mode="wait">
         <motion.img
           key={current}
           src={images[current]}
           alt={`Background ${current + 1}`}
-          className={`absolute inset-0 w-full h-full object-cover z-0 object-${positions[current]}`}
+          // force no border-radius and ensure full cover
+          className={`absolute inset-0 w-full h-full object-cover z-0 object-${positions[current]} rounded-none`}
+          style={{ borderRadius: 0 }}
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.1 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }} // smoother transition
+          transition={{ duration: 1.2, ease: "easeInOut" }}
         />
       </AnimatePresence>
 
@@ -152,5 +156,4 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
-  );
-}
+  );}

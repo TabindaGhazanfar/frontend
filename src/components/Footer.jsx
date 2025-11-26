@@ -5,6 +5,18 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   const year = new Date().getFullYear();
 
+  // Top categories list (plain text / non-clickable)
+  const topCategories = [
+    "Cameras & Lenses",
+    "Vehicles & Bikes",
+    "Furniture & Home",
+    "Electronics & Appliances",
+    "Tools & Hardware",
+    "Party & Events",
+    "Sports & Fitness",
+    "Travel Gear",
+  ];
+
   return (
     <footer className="relative mt-12 overflow-hidden text-white">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#2aaea0] via-[#1a8e83] to-[#107d72]" />

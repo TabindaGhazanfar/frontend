@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, BarChart2, PlusCircle, User } from "lucide-react";
+import { Home, PlusCircle, User } from "lucide-react";
 
 export default function OwnerDashboard() {
   return (
@@ -31,7 +31,6 @@ export default function OwnerDashboard() {
         </div>
 
         <div className="bg-white rounded-xl shadow p-5 flex items-center gap-4 hover:shadow-lg transition">
-          <BarChart2 className="text-[#F7A72B] w-8 h-8" />
           <div>
             <p className="text-gray-500 text-sm">Earnings</p>
             <h2 className="text-xl font-bold text-gray-800">$3,450</h2>
@@ -55,14 +54,6 @@ export default function OwnerDashboard() {
             <p className="text-gray-200 text-sm">Quickly add a new item to rent out</p>
           </div>
           <PlusCircle size={28} />
-        </button>
-
-        <button className="bg-[#C47C5E] hover:bg-[#a96850] text-white font-semibold rounded-xl p-5 flex items-center justify-between transition">
-          <div>
-            <h3 className="text-lg font-bold">View Analytics</h3>
-            <p className="text-gray-200 text-sm">Check your performance & earnings</p>
-          </div>
-          <BarChart2 size={28} />
         </button>
       </div>
     </section>
